@@ -1,0 +1,6 @@
+pymysql
+requests
+dotenv
+uvicorn
+fastqpi
+pymongo
