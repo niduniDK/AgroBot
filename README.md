@@ -81,4 +81,4 @@ npm run dev
 
 </p>
 
-## Thank you for visiting AgroBot! Let's grow a healthier, more sustainable world 🌍🌱.
+Thank you for visiting AgroBot! Let's grow a healthier, more sustainable world 🌍🌱.
