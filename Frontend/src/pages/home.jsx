@@ -5,6 +5,7 @@ import bg2 from '../assets/AgroBot-bg-2.jpg';
 import bg3 from '../assets/AgroBot-bg-3.jpg';
 import {easeOut, motion, AnimatePresence, animate, useInView} from 'framer-motion';
 import Footer from "../components/footer";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
 
@@ -20,7 +21,9 @@ function Home() {
     }
     
     const ref = useRef(null);
+    const section = document.getElementById('common-diseases');
     const isInView = useInView(ref, {once: false});
+    const navigate = useNavigate();
 
     const [diseases, setDiseases] = useState([]);
     const [currentDisease, setCurrentDisease] = useState([]);
@@ -30,6 +33,10 @@ function Home() {
         diseases[(currentDisease + 1) % diseases.length],
         diseases[(currentDisease + 2) % diseases.length]
     ]
+
+    const scrollInto = () => {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -136,7 +143,9 @@ function Home() {
                     <h1 className="text-center text-green-700 text-xl"><strong>Aware of timely diseases of different crops</strong></h1>
                     <div className="flex flex-col justify-center items-center">
                         <img src={bg3} alt="" className="w-1/2 h-32 m-5 justify-center items-center"/>
-                        <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50">View More</button>
+                        <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
+                        onClick={scrollInto}
+                        >View More</button>
                     </div>
                 </motion.div>
             </motion.div>
@@ -147,6 +156,7 @@ function Home() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
             }}
+            id="common-diseases"
             >
                 <motion.h1 className="text-5xl text-center bg-slate-600 bg-opacity-40 text-white m-0 p-10" variants={itemVarient}><strong>Common Crop Diseases</strong></motion.h1>
                 <AnimatePresence mode="wait">
@@ -158,7 +168,11 @@ function Home() {
                                 animate={{opacity:1, y: 0, transition: {duration: 0.5, ease: "easeOut"}}}
                                 className="items-center justify-center bg-white rounded-md shadow-lg hover:p-12 hover:bg-slate-300 hover:shadow-2xl transition duration-300"
                                 variants={{sliderVarient}}
-                                key={disease.id}>
+                                key={disease.id}
+                                onClick={() => {
+                                    navigate('/disease_details', {state: {disease: disease}})
+                                }}
+                                >
                                     <h1 className="text-4xl text-green-950 text-center pt-10 py-20"><strong>{disease.common_name}</strong></h1>
                                     <img src={disease.image_url} alt="No image available" className="w-full h-auto pt-1 pb-10 p-10 items-center justify-center rounded-lg"/>
                                 </motion.div>
