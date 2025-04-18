@@ -63,7 +63,7 @@ npm run dev
 
 *. Community-Driven Knowledge Base: Users can contribute to the platform by adding new diseases and solutions, creating a growing knowledge base for farmers worldwide.
 
-📈 Future Plans
+### 📈 Future Plans
 *. Mobile Application: Develop a mobile version of AgroBot for easier access in the field.
 
 *. AI-Powered Disease Prediction: Use machine learning to predict potential disease outbreaks based on weather conditions and past trends.
