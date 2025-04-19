@@ -96,7 +96,7 @@ npm run dev
 
 <p align="center">
   <em>Chat Interface of AgroBot (Chatbot and Virtual Assistant is under development)</em><br/><br/>
-  <img src=".\Frontend\src\assets\screen-image-6.png" alt="Landing Page" width="600"><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-7.png" alt="Landing Page" width="600"><br/><br/>
   <br>
 
 </p>
