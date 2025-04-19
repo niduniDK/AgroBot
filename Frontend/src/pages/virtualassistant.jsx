@@ -38,7 +38,7 @@ function Assistant() {
             }}
             />
             <div className="flex flex-row items-center justify-center w-full h-auto m-2 ml-0 my-5">
-                <img src={attach} alt="" className="w-12 h-auto cursor-pointer"/>
+                <img src={attach} alt="" className="w-10 h-auto cursor-pointer"/>
                 <input type="text" id='msg' className="bg-green-50 text-black border-green-950 border-2 p-3 rounded-full w-2/3 m-5" required
                 value={typedMsg}
                 onChange={(e) => {
@@ -47,7 +47,7 @@ function Assistant() {
                     setFromVA(false);
                 }}
                 />
-                <img src={send} alt="" className="w-12 h-auto cursor-pointer"
+                <img src={send} alt="" className="w-10 h-auto cursor-pointer"
                 onClick={() => {
                     hasTyped ? navigate('/chat', {state : {userMsg: typedMsg, fromVA:true}}) : alert("Please type a message before sending.");
                 }}
