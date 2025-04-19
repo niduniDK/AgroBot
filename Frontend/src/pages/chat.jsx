@@ -2,68 +2,71 @@ import React, { useEffect, useState } from 'react';
 import attach from '../assets/attach.png';
 import send from '../assets/send.png';
 import { useLocation } from 'react-router-dom';
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
 
-function Chat(){
+function Chat() {
 
-    const tempMsg = "Hello this page is under development. Please check back later."
+  const tempMsg = "Hello this page is under development. Please check back later."
+  const location = useLocation();
+  const [typedMsg, setTypedMsg] = useState(location.state?.userMsg);
+  const [messages, setMessages] = useState([]);
 
-    const location = useLocation();
+  const MsgBox = ({ msg, isBot }) => {
+    return (
+      <div className={`flex ${isBot ? "justify-start" : "justify-end"}`}>
+        <p className={`text-black rounded-xl p-5 mx-8 my-3 ${isBot ? "text-left bg-green-300" : "text-right bg-green-50"}`}>{msg}</p>
+      </div>
+    );
+  };
 
-    const [userMsg, setUserMsg] = useState("");
-    const [isUserMsg, setIsUserMsg] = useState(false);
-    const [isBotMsg, setIsBotMsg] = useState(false);
-    const [botMsg, setBotMsg] = useState(tempMsg);
+  const handleChat = () => {
+    if (typedMsg.trim() !== "") {
+      setMessages(prev => [...prev, { text: typedMsg, isBot: false }]);
+    }
+    setTimeout(() => {
+      setMessages(prev => [...prev, { text: tempMsg, isBot: true }]);
+    }, 500);
+  };
 
-    const fromVA = location.state?.fromVA;
+  return (
+    <div>
+      <Navbar />
+      <div className="flex flex-col min-h-screen bg-gradient-r from-green-950 to-blue-950">
+        {/* Message area */}
+        <div className="flex-1 overflow-y-auto p-5">
+          {messages.map((msg, index) => (
+            <MsgBox key={index} msg={msg.text} isBot={msg.isBot} />
+          ))}
+        </div>
 
-    const MsgBox = ({ msg, sender, onRender }) => {
-        useEffect(() => {
-          if (onRender) onRender();
-        }, []);
-      
-        return (
-          <p>{msg}</p>
-        );
-      };
-      
-
-    const handleChat = () => {
-        return (
-          <MsgBox
-            msg={userMsg}
-            onRender={() => {
-              console.log("MsgBox rendered!");
-              setIsBotMsg(true);
+        {/* Input bar */}
+        <div className="flex flex-row bg-gradient-r from-green-950 to-blue-950 items-center justify-center w-full h-auto p-3">
+          <img src={attach} alt="" className="w-10 h-auto cursor-pointer" />
+          <input
+            type="text"
+            id="user_msg"
+            className="bg-green-50 text-black border-green-950 border-2 p-3 rounded-full w-2/3 m-3"
+            required
+            value={typedMsg}
+            onChange={(e) => {
+              setTypedMsg(e.target.value);
             }}
           />
-        );
-      };
-      
-    
-    useEffect(() => {
-        return fromVA ? setUserMsg(location.state?.userMsg) : handleChat();
-    });
-
-    
-
-    return (
-        <div className="flex h-screen bg-gradient-r from-green-950 to-blue-950">
-            <div className="flex flex-row absolute bottom-0 bg-gradient-r from-green-950 to-blue-950 items-center justify-center w-full h-auto m-2 ml-0 my-5">
-                <img src={attach} alt="" className="w-12 h-auto cursor-pointer"/>
-                <input type="text" id='user_msg' className="bg-green-50 text-black border-green-950 border-2 p-3 rounded-full w-2/3 m-5" required
-                value={userMsg}
-                onChange={(e) => {
-                    setUserMsg(e.target.value);
-                    setIsUserMsg(true);
-                    setIsBotMsg(false);
-                }}
-                />
-                <img src={send} alt="" className="w-12 h-auto cursor-pointer"
-                onClick={handleChat}
-                />
-            </div>
+          <img
+            src={send}
+            alt=""
+            className="w-10 h-auto cursor-pointer"
+            onClick={() => {
+              handleChat();
+              setTypedMsg("");
+            }}
+          />
         </div>
-    )
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
 export default Chat;
