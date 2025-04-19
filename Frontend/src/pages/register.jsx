@@ -55,6 +55,7 @@ function Register(){
             height: "100vh",
             width: "100vw",
         }}
+        className="flex flex-row"
         >
             <div className="fixed top-0 left-0 flex flex-col bg-slate-300 bg-opacity-70 rounded-lg shadow-lg p-5 w-1/3 h-auto ml-12 mt-20">
                 <Link to={"/login"} className="flex flex-row items-center justify-center mx-10 mb-0 p-5 pb-0">
@@ -92,6 +93,11 @@ function Register(){
                     >Signup</button>
                     <p className="text-lg text-green-800 m-2 p-2 font-semibold">Already have an account? <Link to={"/login"} className="text-blue-500 hover:underline"><strong>Login</strong></Link></p>
                 </div>
+            </div>
+
+            <div className="fixed top-0 right-0 bg-slate-600 bg-opacity-90 rounded-lg shadow-lg p-5 w-1/3 h-auto mr-12 mt-20 transition duration-300 animate-pulse">
+                <p className="text-lg text-white font-semibold p-10">AgroBot is an AI-powered platform revolutionizing modern agriculture through intelligent crop disease detection and management. Leveraging advanced image processing and machine learning algorithms, AgroBot empowers farmers and agronomists to instantly identify plant diseases by simply capturing images of affected crops. Beyond detection, the platform offers a rich, curated knowledge base detailing symptoms, causes, and treatment recommendations for a wide range of crop diseases — helping users make informed decisions to protect and optimize their harvests.
+                </p>
             </div>
         </motion.div>
     )
