@@ -21,7 +21,7 @@ function App() {
           <Route path='/disease_details' element={<Details/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
-          <Route path='/form' element={<Form/>}></Route>
+          <Route path='/send_details' element={<Form/>}></Route>
           <Route path='/virtual_assistant' element={<VirtualAssistant/>}></Route>
           <Route path='/chat' element={<Chat/>}></Route>
         </Routes>
