@@ -2,14 +2,16 @@ import React from "react";
 import icon from "../assets/app-icon.png";
 import login from '../assets/login-icon.png';
 import bot from '../assets/bot.png';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Navbar(){
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const isVirtualAssistant = location.pathname === '/virtual_assistant';
 
     return(
-        <div className="flex flex-row min-w-full w-full bg-white h-auto">
+        <div className={`flex flex-row min-w-full w-full bg-white ${isVirtualAssistant?"fixed top-0 left-0 h-auto" : "h-auto"} `}>
             <Link to={"/home"} className="flex flex-row items-center justify-center">
                 <img src={icon} alt="" className="w-12 h-auto m-5 ml-28"/>
                 <h1 className="text-green-600 text-4xl m-2 ml-0 my-5"><strong>AgroBot</strong></h1>
