@@ -32,13 +32,17 @@ function Assistant() {
     <div>
         <Navbar/>
         <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-green-950 to-blue-950">
-            <img src={bot} alt="" className="flex w-32 h-auto m-5 mt-0 pt-0 cursor-pointer hover:bg-green-200 hover:p-2 hover:rounded-md transition duration-300 animate-spin"
+            <img src={bot} alt="" className="flex w-32 h-auto m-5 mt-20 pt-3 cursor-pointer hover:bg-green-200 hover:p-2 hover:rounded-md transition duration-300 animate-spin"
             onClick={() => {
                 navigate('/virtual_assistant');
             }}
             />
             <div className="flex flex-row items-center justify-center w-full h-auto m-2 ml-0 my-5">
-                <img src={attach} alt="" className="w-10 h-auto cursor-pointer"/>
+                <img src={attach} alt="" className="w-10 h-auto cursor-pointer"
+                onClick={() => {
+                    navigate('/send_details');
+                }}
+                />
                 <input type="text" id='msg' className="bg-green-50 text-black border-green-950 border-2 p-3 rounded-full w-2/3 m-5" required
                 value={typedMsg}
                 onChange={(e) => {
