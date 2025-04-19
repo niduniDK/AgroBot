@@ -14,7 +14,6 @@
 - **Backend:** FastAPI
 - **Database:** MySQL, MongoDB
 - **Machine Learning (Future Integration):** TensorFlow, OpenCV (for disease detection using images)
-- **Image Recognition API:** For identifying diseases based on plant images
 
 ### 🚀 **Getting Started**
 
