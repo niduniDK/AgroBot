@@ -125,7 +125,7 @@ function Home() {
                         <img src={bg1} alt="" className="w-1/2 h-32 m-5"/>
                         <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
                         onClick={() => {
-                            navigate('/form')
+                            navigate('/send_details')
                         }}
                         >View More</button>
                     </div>
