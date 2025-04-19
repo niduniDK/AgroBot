@@ -52,6 +52,12 @@ function Chat() {
             onChange={(e) => {
               setTypedMsg(e.target.value);
             }}
+            onKeyDown={(e => {
+              if (e.key === "Enter"){
+                handleChat();
+                setTypedMsg("");
+              }
+            })}
           />
           <img
             src={send}
