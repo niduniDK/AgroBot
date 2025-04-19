@@ -12,7 +12,7 @@
 ### 🌿 **Technologies Used**
 - **Frontend:** React, Vite, Framer Motion
 - **Backend:** FastAPI
-- **Database:** MySQL
+- **Database:** MySQL, MongoDB
 - **Machine Learning (Future Integration):** TensorFlow, OpenCV (for disease detection using images)
 - **Image Recognition API:** For identifying diseases based on plant images
 
