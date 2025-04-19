@@ -70,10 +70,33 @@ npm run dev
 ## Screen Images
 
 <p align="center">
-  <em>Landing page of MovieStore</em><br/><br/>
+  <em>Login page of AgroBot</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-4.png" alt="Landing Page" width="600"><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-5.png" alt="Landing Page" width="600"><br/><br/>
+  <br>
+
+</p>
+
+
+<p align="center">
+  <em>Landing page of AgroBot</em><br/><br/>
   <img src=".\Frontend\src\assets\screen-image-1.png" alt="Landing Page" width="600"><br/><br/>
   <img src=".\Frontend\src\assets\screen-image-2.png" alt="Landing Page" width="600"><br/><br/>
   <img src=".\Frontend\src\assets\screen-image-3.png" alt="Landing Page" width="600"><br/><br/>
+  <br>
+
+</p>
+
+<p align="center">
+  <em>Virtual Assistant Page of AgroBot</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-6.png" alt="Landing Page" width="600"><br/><br/>
+  <br>
+
+</p>
+
+<p align="center">
+  <em>Chat Interface of AgroBot (Chatbot and Virtual Assistant is under development)</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-6.png" alt="Landing Page" width="600"><br/><br/>
   <br>
 
 </p>
