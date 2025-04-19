@@ -12,9 +12,8 @@
 ### 🌿 **Technologies Used**
 - **Frontend:** React, Vite, Framer Motion
 - **Backend:** FastAPI
-- **Database:** MySQL
+- **Database:** MySQL, MongoDB
 - **Machine Learning (Future Integration):** TensorFlow, OpenCV (for disease detection using images)
-- **Image Recognition API:** For identifying diseases based on plant images
 
 ### 🚀 **Getting Started**
 
@@ -60,8 +59,6 @@ npm run dev
 *. Tailored Recommendations: AgroBot generates personalized solutions for each disease, whether it’s through cultural practices or chemical treatments.
 
 *. Tracking Plant Health: Keep track of plant health over time and get insights into the best care practices based on your region’s climate and soil conditions.
-
-*. Community-Driven Knowledge Base: Users can contribute to the platform by adding new diseases and solutions, creating a growing knowledge base for farmers worldwide.
 
 ### 📈 Future Plans
 *. Mobile Application: Develop a mobile version of AgroBot for easier access in the field.
