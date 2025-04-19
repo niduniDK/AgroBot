@@ -123,7 +123,11 @@ function Home() {
                     <h1 className="text-center text-xl text-green-700"><strong>Check the problem in your crop</strong></h1>
                     <div className="flex flex-col justify-center items-center">
                         <img src={bg1} alt="" className="w-1/2 h-32 m-5"/>
-                        <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50">View More</button>
+                        <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
+                        onClick={() => {
+                            navigate('/form')
+                        }}
+                        >View More</button>
                     </div>
                 </motion.div>
 
@@ -133,7 +137,11 @@ function Home() {
                     <h1 className="text-center text-xl text-green-700"><strong>Get information from our Virtual Assistant</strong></h1>
                     <div className="flex flex-col justify-center items-center">
                         <img src={bg2} alt="" className="w-1/2 h-32 m-5"/>
-                        <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50">View More</button>
+                        <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
+                        onClick={() => {
+                            navigate('/virtual_assistant')
+                        }}
+                        >View More</button>
                     </div>
                 </motion.div>
 
@@ -174,7 +182,7 @@ function Home() {
                                 }}
                                 >
                                     <h1 className="text-4xl text-green-950 text-center pt-10 py-20"><strong>{disease.common_name}</strong></h1>
-                                    <img src={disease.image_url} alt="No image available" className="w-full h-auto pt-1 pb-10 p-10 items-center justify-center rounded-lg"/>
+                                    <img src={disease.image_url} alt="No image available" className="w-full h-auto pt-1 pb-10 p-10 items-center justify-center rounded-2xl"/>
                                 </motion.div>
                             )
                         })}

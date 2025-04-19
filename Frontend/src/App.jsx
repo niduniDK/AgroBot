@@ -3,6 +3,10 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/home'
 import Details from './pages/details'
+import Login from './pages/login'
+import Register from './pages/register'
+import VirtualAssistant from './pages/virtualassistant'
+import Form from './pages/form'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +18,10 @@ function App() {
           <Route path='/' element={<Home/>}></Route>
           <Route path='/home' element={<Home/>}></Route>
           <Route path='/disease_details' element={<Details/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/register' element={<Register/>}></Route>
+          <Route path='/form' element={<Form/>}></Route>
+          <Route path='/virtual_assistant' element={<VirtualAssistant/>}></Route>
         </Routes>
       </Router>
     </>

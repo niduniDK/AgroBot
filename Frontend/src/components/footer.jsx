@@ -21,9 +21,9 @@ function Footer() {
                 <h1 className="text-green-600 text-4xl m-2 ml-0 my-5"><strong>AgroBot</strong></h1>
             </Link>
             <div className="justify-center absolute right-6">
-                <p className="text-sm text-gray-700 m-2 mt-5 mr-20">agrobot@gmail.com</p>
+                <p className="text-sm text-gray-700 mb-2 mr-20">agrobot@gmail.com</p>
                 <p className="text-sm text-gray-700 m-2 mr-20">123 Movie St, Agro City, Sri Lanka</p>
-                <p className="text-sm text-gray-700 m-2 mb-5 mr-20">+94 (123) 456-7890</p>
+                <p className="text-sm text-gray-700 mt-2 mr-20">+94 (123) 456-7890</p>
             </div>
             <p className="text-sm text-gray-700 mx-72 my-10 text-center">&copy; 2025 AgroBot. All rights reserved.</p>
         </motion.div>
