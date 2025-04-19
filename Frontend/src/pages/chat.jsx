@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import attach from '../assets/attach.png';
 import send from '../assets/send.png';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 
@@ -11,6 +11,9 @@ function Chat() {
   const location = useLocation();
   const [typedMsg, setTypedMsg] = useState(location.state?.userMsg);
   const [messages, setMessages] = useState([]);
+  
+
+  const navigate = useNavigate();
 
   const MsgBox = ({ msg, isBot }) => {
     return (
@@ -29,20 +32,29 @@ function Chat() {
     }, 500);
   };
 
+  useEffect(() => {
+    const storedMsgs = localStorage.getItem("messages");
+    if (storedMsgs){
+      setMessages(JSON.parse(storedMsgs));
+    }
+  },[])
+
   return (
     <div>
       <Navbar />
       <div className="flex flex-col min-h-screen bg-gradient-r from-green-950 to-blue-950">
-        {/* Message area */}
+        
         <div className="flex-1 overflow-y-auto p-5">
           {messages.map((msg, index) => (
             <MsgBox key={index} msg={msg.text} isBot={msg.isBot} />
           ))}
         </div>
 
-        {/* Input bar */}
         <div className="flex flex-row bg-gradient-r from-green-950 to-blue-950 items-center justify-center w-full h-auto p-3">
-          <img src={attach} alt="" className="w-10 h-auto cursor-pointer" />
+          <img src={attach} alt="" className="w-10 h-auto cursor-pointer" onClick={() => {
+            localStorage.setItem("messages",JSON.stringify(messages));
+            navigate('/send_details');
+            }}/>
           <input
             type="text"
             id="user_msg"
