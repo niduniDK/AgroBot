@@ -7,6 +7,7 @@ import Login from './pages/login'
 import Register from './pages/register'
 import VirtualAssistant from './pages/virtualassistant'
 import Form from './pages/form'
+import Chat from './pages/chat'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +23,7 @@ function App() {
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/form' element={<Form/>}></Route>
           <Route path='/virtual_assistant' element={<VirtualAssistant/>}></Route>
+          <Route path='/chat' element={<Chat/>}></Route>
         </Routes>
       </Router>
     </>
