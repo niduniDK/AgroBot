@@ -101,4 +101,11 @@ npm run dev
 
 </p>
 
+<p align="center">
+  <em>Page for letting users to send details about crop diseases</em><br/><br/>
+  <img src=".\Frontend\src\assets\screen-image-8.png" alt="Landing Page" width="600"><br/><br/>
+  <br>
+
+</p>
+
 Thank you for visiting AgroBot! Let's grow a healthier, more sustainable world 🌍🌱.
