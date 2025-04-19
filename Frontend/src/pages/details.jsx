@@ -12,7 +12,7 @@ function Details() {
         <div>
             <Navbar />
             <div className='flex flex-row bg-slate-100'>
-                {disease.image_url? <img src={disease.image_url} alt="" className='w-1/2 h-auto' /> : <p>No image found</p>}
+                {disease.image_url? <img src={disease.image_url} alt="" className='w-1/2 h-auto bg-slate-100 m-10' /> : <p>No image found</p>}
                 <div className='flex flex-col justify-center ml-5'>
                     <h1 className='text-2xl font-bold text-left m-2 text-black'>{disease.common_name}</h1>
                     <h3 className='text-sm text-left m-2 text-black'>Scientific Name: {disease.scientific_name}</h3>
