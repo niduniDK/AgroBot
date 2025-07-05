@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import bg2 from "../assets/AgroBot-bg-2.jpg";
+import bg2 from '../assets/Agrobot-bg-2.jpg';
 import { Link, useNavigate } from "react-router-dom";
 import icon from "../assets/app-icon.png";
 

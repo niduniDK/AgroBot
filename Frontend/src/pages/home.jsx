@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../components/navbar";
 import bg1 from '../assets/AgroBot-bg-1.jpg';
-import bg2 from '../assets/AgroBot-bg-2.jpg';
-import bg3 from '../assets/AgroBot-bg-3.jpg';
+import bg2 from '../assets/Agrobot-bg-2.jpg';
+import bg3 from '../assets/Agrobot-bg-3.jpg';
 import {easeOut, motion, AnimatePresence, animate, useInView} from 'framer-motion';
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
