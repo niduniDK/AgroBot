@@ -8,7 +8,7 @@ load_dotenv()
 API_KEY = os.getenv('API_KEY')
 API_URL = 'https://perenual.com/api/pest-disease-list?key={API_KEY}'
 
-def get_crop_details(crop_name: str) -> str:
+def get_crop_details(crop_name: str, history: list) -> str:
     try:
         response = requests.get(API_URL.format(API_KEY=API_KEY))
         response.raise_for_status()
@@ -18,7 +18,7 @@ def get_crop_details(crop_name: str) -> str:
             if item['plants']['common_name'].lower() == crop_name.lower():
                 crop_details.update(item)
         query = f"Provide detailed information about {crop_name} using {crop_details}"
-        chat_response = generate_response(query)
+        chat_response = generate_response(query, history)
         return chat_response
     except Exception as e:
         print(f"Error fetching crop details: {e}")

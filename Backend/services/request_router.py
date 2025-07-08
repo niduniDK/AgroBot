@@ -11,17 +11,19 @@ router = APIRouter()
 
 class ChatRequest(BaseModel):
     query: str
+    history: list
 
 @router.post("/chat")
 def get_response(msg: ChatRequest) -> str:
     query = msg.query
+    history = msg.history
     intent = classify_intent(query)
     if intent == 'crop_details':
         crop_name = identify_crop(query)
-        return get_crop_details(crop_name)
+        return get_crop_details(crop_name, history)
     elif intent == 'disease_details':
-        return get_disease_details(query)
+        return get_disease_details(query,history)
     elif intent == 'pest_details':
-        return get_pest_details(query)
+        return get_pest_details(query, history)
     else:
-        return handle_general_questions(query)
+        return handle_general_questions(query, history)
