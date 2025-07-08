@@ -6,14 +6,12 @@
 - **Disease Detection:** Leverage image recognition and data analysis to detect and identify common plant diseases, pests, and environmental stress factors.
 - **Expert Solutions:** Access tailored solutions, including cultural practices and chemical treatments, to mitigate plant issues effectively.
 - **Real-Time Information:** Get up-to-date information on local climate conditions, pest outbreaks, and seasonal agricultural challenges.
-- **Interactive Dashboard:** Visualize and track plant health and growth with easy-to-understand data charts and reports.
-- **Comprehensive Disease Database:** Detailed descriptions, images, and preventive measures for various plant diseases from around the world.
+- **Comprehensive Disease Data:** Detailed descriptions, images, and preventive measures for various plant diseases from around the world.
 
 ### 🌿 **Technologies Used**
 - **Frontend:** React, Vite, Framer Motion
 - **Backend:** FastAPI
-- **Database:** MySQL, MongoDB
-- **Machine Learning (Future Integration):** TensorFlow, OpenCV (for disease detection using images)
+- **Machine Learning:** TensorFlow (for disease detection using images)
 
 ### 🚀 **Getting Started**
 
@@ -30,7 +28,7 @@ cd AgroBot
 2. Install the required Python dependencies.
 
 ```bash
-cd backend
+cd Backend
 pip install -r requirements.txt
 ```
 
@@ -45,7 +43,7 @@ uvicorn main:app --reload
 
 2. Install the required dependencies.
 ```bash
-cd frontend
+cd Frontend
 npm install
 ```
 3. Run the development server:
@@ -60,12 +58,13 @@ npm run dev
 
 *. Tracking Plant Health: Keep track of plant health over time and get insights into the best care practices based on your region’s climate and soil conditions.
 
+*. Integrated Chatbot: A conversational interface to provide instant recommendations to users in real-time.
+
+
 ### 📈 Future Plans
 *. Mobile Application: Develop a mobile version of AgroBot for easier access in the field.
 
 *. AI-Powered Disease Prediction: Use machine learning to predict potential disease outbreaks based on weather conditions and past trends.
-
-*. Integrated Chatbot: A conversational interface to provide instant recommendations to users in real-time.
 
 ## Screen Images
 
