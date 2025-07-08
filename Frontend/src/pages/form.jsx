@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { data, useNavigate } from 'react-router-dom';
 
 function Form() {
 //   const [selectedFile, setSelectedFile] = useState(null);
@@ -34,6 +34,32 @@ function Form() {
     const [district, setDistrict] = useState("");
     const [description, setDescription] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
+    const [prediction, setPrediction] = useState("Hello");
+
+    const getPrediction = async () => {
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        fetch(`http://localhost:8000/predict_disease`, {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.prediction){
+                setPrediction(data)
+                console.log("Prediction received:", toString(data));
+                alert(`Prediction: ${data}`);
+            }else {
+                alert("No prediction received. Please try again.");
+            }
+            
+        })
+        .catch(error => {
+            console.error("Error getting prediction:", error);
+        })
+    }
 
     const navigate = useNavigate();
 
@@ -50,7 +76,7 @@ function Form() {
             <div className='flex flex-col items-center justify-center mt-2 mx-5'>
                 <label htmlFor="district" className="text-lg text-black mt-5 font-bold">Enter an image(photo) of the plant/leaf of the plant</label>
                 <div className='flex flex-row m-5'>
-                <input type="file" id='file' className="mb-4" />
+                <input type="file" onChange={e => setSelectedFile(e.target.files[0])} />
                 <button
                     className="bg-green-600 text-white hover:bg-green-700 p-2 rounded"
                     onClick={() => setSelectedFile(document.getElementById('file').files[0])}
@@ -87,6 +113,8 @@ function Form() {
                     setDescription("");
                     setDistrict("");
                     setSelectedFile(null);
+                    getPrediction();
+                    alert("Prediction: ",prediction);
                     navigate('/chat', {state : {userMsg: description}});
                 }}
             >

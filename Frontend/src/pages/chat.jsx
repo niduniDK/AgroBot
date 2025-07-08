@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import attach from '../assets/attach.png';
 import send from '../assets/send.png';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ function Chat() {
 
   const tempMsg = "Hello this page is under development. Please check back later."
   const location = useLocation();
-  const [typedMsg, setTypedMsg] = useState(location.state?.userMsg);
+  const [typedMsg, setTypedMsg] = useState(location.state?.userMsg || "");
   const [messages, setMessages] = useState([]);
   
 
@@ -23,14 +23,49 @@ function Chat() {
     );
   };
 
-  const handleChat = () => {
+  
+  const handleChat = async () => {
     if (typedMsg.trim() !== "") {
-      setMessages(prev => [...prev, { text: typedMsg, isBot: false }]);
+      const newUserMessage = { text: typedMsg, isBot: false };
+      setMessages(prev => [...prev, newUserMessage]);
+      
+      try {
+        const response = await fetch('http://localhost:8000/chatbot/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            query: typedMsg
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok: " + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log("Response from bot: ", data);
+        
+        setTimeout(() => {
+          setMessages(prev => [...prev, { text: data, isBot: true }]);
+        }, 500);
+
+      } catch (error) {
+        console.error("Problem with fetching response: ", error);
+        setTimeout(() => {
+          setMessages(prev => [...prev, { text: tempMsg, isBot: true }]);
+        }, 500);
+      }
     }
-    setTimeout(() => {
-      setMessages(prev => [...prev, { text: tempMsg, isBot: true }]);
-    }, 500);
   };
+
+  useEffect(() => {
+    const storedMsgs = localStorage.getItem("messages");
+    if (storedMsgs){
+      setMessages(JSON.parse(storedMsgs));
+    }
+  }, []);
 
   useEffect(() => {
     const storedMsgs = localStorage.getItem("messages");
