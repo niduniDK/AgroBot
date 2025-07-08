@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import get_diseases, user_authentication
+from services import request_router
 
 app = FastAPI()
 
@@ -14,6 +15,7 @@ app.add_middleware(
 
 app.include_router(get_diseases.router, prefix='/diseases', tags=['Diseases'])
 app.include_router(user_authentication.router, prefix='/user', tags=['Authentication'])
+app.include_router(request_router.router, prefix='/chatbot', tags=['Chat'])
 
 if __name__ == '__main__':
     import uvicorn
