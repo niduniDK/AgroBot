@@ -1,9 +1,17 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File
+from fastapi.responses import JSONResponse
+import shutil
+import uuid
+from PIL import Image
+import numpy as np
 from pydantic import BaseModel
 from typing import List, Dict
 from dotenv import load_dotenv
 import requests
 import os
+import joblib
+from tensorflow.keras.models import load_model
+import json
 
 load_dotenv()
 
@@ -11,6 +19,11 @@ router = APIRouter()
 
 API_KEY = os.getenv('API_KEY')
 API_URL = f"https://perenual.com/api/pest-disease-list?key={API_KEY}"
+
+with open('F:\My Projects\AgroBot\Backend\class_labels.json','r') as f:
+    class_labels = json.load(f)
+
+disease_prediction_model = load_model('F:\My Projects\AgroBot\Backend\ml_models\disease_detection_model.h5')
 
 class Disease(BaseModel):
     id: int
@@ -46,3 +59,24 @@ def get_diseases_list():
     except requests.RequestException as e:
         print(f"Error fetching data from API: {e}")
         return []
+    
+
+@router.get('/predict_disease', response_model=str)
+def predict_disease(file: UploadFile = File(...)):
+    try:
+        temp_filename = f"temp_{uuid.uuid4()}.jpg"
+        with open(temp_filename, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        img = Image.open(temp_filename).resize((224, 224))
+        img_array = np.array(img) / 255.0
+        img_array = np.extend_dims(img_array, axis=0)
+
+        pred_idx = disease_prediction_model.predict(img_array).argmaxx(axis=1)[0]
+        pred = class_labels[pred_idx]
+        os.remove(temp_filename)  
+
+        return JSONResponse(content={"prediction": pred})
+    except Exception as e:
+        print(f"Error predicting disease: {e}")
+        return JSONResponse(content={"error": "Failed to predict disease"}, status_code=500)
