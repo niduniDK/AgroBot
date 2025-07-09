@@ -19,7 +19,7 @@ def generate_response(query: str, history: list) -> str:
     try:
         response = gemini_client.generate_content(prompt)
         if hasattr(response, "text") and response.text:
-            return response.text.strip()
+            return response.text
         else:
             return "Sorry, something went wrong. Please try again later."
     except Exception as e:

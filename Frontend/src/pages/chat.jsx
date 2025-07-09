@@ -4,6 +4,10 @@ import send from '../assets/send.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github.css'; // Import highlight.js styles
 
 function Chat() {
 
@@ -18,7 +22,11 @@ function Chat() {
   const MsgBox = ({ msg, isBot }) => {
     return (
       <div className={`flex ${isBot ? "justify-start" : "justify-end"}`}>
-        <p className={`text-black rounded-xl p-5 mx-8 my-3 ${isBot ? "text-left bg-green-300" : "text-right bg-green-50"}`}>{msg}</p>
+        <p className={`text-black rounded-xl p-5 mx-8 my-3 ${isBot ? "text-left bg-green-300" : "text-right bg-green-50"}`}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+            {msg}
+          </ReactMarkdown>
+        </p>
       </div>
     );
   };

@@ -9,6 +9,17 @@ function Navbar(){
     const navigate = useNavigate();
     const location = useLocation();
     const isVirtualAssistant = location.pathname === '/virtual_assistant';
+    const handleTranslate = () => {
+        fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=si&dt=t&q=Hello',{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).catch(error => {
+            console.error("Error during translation: ", error);
+        }
+)
+    }
 
     return(
         <div className={`flex flex-row min-w-full w-full bg-white ${isVirtualAssistant?"fixed top-0 left-0 h-auto" : "h-auto"} `}>
@@ -18,6 +29,8 @@ function Navbar(){
             </Link>
 
             <div className="flex flex-row items-center justify-center w-full h-auto m-2 ml-0 my-5">
+                <button className="bg-green-600 text-white p-3 rounded-lg m-2 ml-20 hover:bg-green-700 transition duration-300" 
+                onClick={handleTranslate}>Translate to Sinhala</button>
                 <img src={bot} alt="" className="absolute top-3 right-3 w-12 h-auto m-5 mr-14 cursor-pointer hover:bg-green-200 hover:p-2 hover:rounded-md transition duration-300 animate-bounce"
                 onClick={() => {
                     navigate('/virtual_assistant');
