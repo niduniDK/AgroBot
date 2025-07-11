@@ -33,7 +33,7 @@ function Navbar(){
                 onClick={handleTranslate}>Translate to Sinhala</button>
                 <img src={bot} alt="" className="absolute top-3 right-3 w-12 h-auto m-5 mr-14 cursor-pointer hover:bg-green-200 hover:p-2 hover:rounded-md transition duration-300 animate-bounce"
                 onClick={() => {
-                    navigate('/virtual_assistant');
+                    navigate('/chat');
                 }}
                 />
                 <img src={login} alt="" className="absolute top-1 right-1 p-3 m-1 mr-32 w-20 h-auto hover:cursor-pointer"
