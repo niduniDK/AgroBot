@@ -1,5 +1,6 @@
 from fastapi import APIRouter, UploadFile, File
 from fastapi.responses import JSONResponse
+from fastapi import Form
 import shutil
 import uuid
 from PIL import Image
@@ -38,7 +39,6 @@ class Disease(BaseModel):
     class Config:
         orm_mode = True
 
-
 @router.get("/disease_list", response_model=List[Disease])
 def get_diseases_list():
     try:
@@ -61,18 +61,23 @@ def get_diseases_list():
         return []
     
 
-@router.get('/predict_disease', response_model=str)
-def predict_disease(file: UploadFile = File(...)):
+@router.post('/predict_disease')
+def predict_disease(
+    file: UploadFile = File(...)
+):
     try:
         temp_filename = f"temp_{uuid.uuid4()}.jpg"
         with open(temp_filename, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
-
-        img = Image.open(temp_filename).resize((224, 224))
+        
+        print(1)
+        print(f"File loaded: {temp_filename}")
+        img = Image.open(temp_filename).convert("RGB").resize((128, 128))
         img_array = np.array(img) / 255.0
-        img_array = np.extend_dims(img_array, axis=0)
+        img_array = img_array.reshape(1, 128, 128, 3)
 
-        pred_idx = disease_prediction_model.predict(img_array).argmaxx(axis=1)[0]
+
+        pred_idx = disease_prediction_model.predict(img_array).argmax(axis=1)[0]
         pred = class_labels[pred_idx]
         os.remove(temp_filename)  
 

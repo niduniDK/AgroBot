@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import bg1 from '../assets/AgroBot-bg-1.jpg';
 import bg2 from '../assets/Agrobot-bg-2.jpg';
 import bg3 from '../assets/Agrobot-bg-3.jpg';
+import attach from '../assets/attach.png';
 import {easeOut, motion, AnimatePresence, animate, useInView} from 'framer-motion';
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +22,9 @@ function Home() {
     }
     
     const ref = useRef(null);
-    const section = document.getElementById('common-diseases');
+    const section = document.getElementById('common-diseases')
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [prediction, setPrediction] = useState("Hello");
     const isInView = useInView(ref, {once: false});
     const navigate = useNavigate();
 
@@ -37,6 +40,49 @@ function Home() {
     const scrollInto = () => {
         section.scrollIntoView({ behavior: 'smooth' });
     }
+
+    const getPrediction = async () => {
+        if (!selectedFile) {
+            alert("Please select a file first.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        for (const [key, value] of formData.entries()) {
+            console.log(key, value); // Debug: confirm data being sent
+        }
+
+        try {
+            const response = await fetch("http://localhost:8000/diseases/predict_disease", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.prediction) {
+                setPrediction(data.prediction);
+                alert(`Prediction: ${data.prediction}`);
+
+                navigate('/chat', {
+                    state: {
+                        userMsg: "",
+                        botMsg: data.prediction,
+                    },
+                });
+            } else {
+                alert("No prediction received. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error getting prediction:", error);
+            alert("Prediction failed. Check console for details.");
+        } finally {
+            setSelectedFile(null);
+        }
+    };
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -123,11 +169,28 @@ function Home() {
                     <h1 className="text-center text-xl text-green-700"><strong>Check the problem in your crop</strong></h1>
                     <div className="flex flex-col justify-center items-center">
                         <img src={bg1} alt="" className="w-1/2 h-32 m-5"/>
-                        <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
-                        onClick={() => {
-                            navigate('/send_details')
-                        }}
-                        >View More</button>
+                        <div className="flex flex-row items-center justify-center">
+                            {/* <input
+                                type="file"
+                                id="file-upload"
+                                className="hidden"
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    setSelectedFile(file);
+                                }}
+                            />
+                            <label htmlFor="file-upload">
+                                <img
+                                    src={attach}
+                                    alt=""
+                                    className="w-10 h-auto cursor-pointer"
+                                />
+                            </label> */}
+                            <button className="p-2 items-center min-w-40 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50" 
+                            onClick={() => navigate('/chat')}>Visit</button>
+                        </div>
+                        
+
                     </div>
                 </motion.div>
 
@@ -139,9 +202,10 @@ function Home() {
                         <img src={bg2} alt="" className="w-1/2 h-32 m-5"/>
                         <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
                         onClick={() => {
-                            navigate('/virtual_assistant')
+                            navigate('/chat');
                         }}
                         >View More</button>
+                        
                     </div>
                 </motion.div>
 
