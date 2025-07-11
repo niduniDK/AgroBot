@@ -145,12 +145,12 @@ function Chat() {
       },[]);
 
   return (
-    <div>
+    <div className='min-h-screen bg-gradient-to-r from-green-950 to-blue-950'>
       <Navbar />
       <div className="text-3xl text-green-100 text-center">
-          <p className="text-5xl text-green-100 text-center font-bold lg:mx-96">{displayText}</p>
+          <p className="text-5xl text-green-100 text-center font-bold lg:mx-96 md:my-24">{displayText}</p>
       </div>
-      <div className="flex flex-col min-h-screen bg-gradient-r from-green-950 to-blue-950">
+      <div className="flex flex-col min-h-96 bg-gradient-r from-green-950 to-blue-950">
         
         <div className="flex-1 overflow-y-auto p-5">
           {/* {messages.length === 0 && location.state?.botMsg && (
