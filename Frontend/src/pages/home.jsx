@@ -7,6 +7,7 @@ import attach from '../assets/attach.png';
 import {easeOut, motion, AnimatePresence, animate, useInView} from 'framer-motion';
 import Footer from "../components/footer";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Home() {
 
@@ -30,6 +31,9 @@ function Home() {
 
     const [diseases, setDiseases] = useState([]);
     const [currentDisease, setCurrentDisease] = useState([]);
+
+    const {t, i18n} = useTranslation();
+    const lang = localStorage.getItem('language') || 'en';
 
     const visibleDiseases = [
         diseases[currentDisease],
@@ -139,17 +143,17 @@ function Home() {
                     }
                 }}
                 >
-                    <motion.h1 variants={itemVarient} className="text-6xl text-center pt-10 py-20"><strong>Welcome to AgroBot!</strong></motion.h1>
-                    <motion.p className="text-center text-lg mx-5 px-10">AgroBot is an AI-powered platform revolutionizing modern agriculture through intelligent crop disease detection and management. Leveraging advanced image processing and machine learning algorithms, AgroBot empowers farmers and agronomists to instantly identify plant diseases by simply capturing images of affected crops. Beyond detection, the platform offers a rich, curated knowledge base detailing symptoms, causes, and treatment recommendations for a wide range of crop diseases — helping users make informed decisions to protect and optimize their harvests.</motion.p>
-                    <motion.h1 variants={itemVarient} className="text-5xl text-center m-5 pt-20"><strong>Our Mission</strong></motion.h1>
+                    <motion.h1 variants={itemVarient} className="text-6xl text-center pt-10 py-20"><strong>{t('home.welcome', 'Welcome to AgroBot!')}</strong></motion.h1>
+                    <motion.p className="text-center text-lg mx-5 px-10">{t('home.intro', 'AgroBot is an AI-powered platform revolutionizing modern agriculture through intelligent crop disease detection and management. Leveraging advanced image processing and machine learning algorithms, AgroBot empowers farmers and agronomists to instantly identify plant diseases by simply capturing images of affected crops. Beyond detection, the platform offers a rich, curated knowledge base detailing symptoms, causes, and treatment recommendations for a wide range of crop diseases — helping users make informed decisions to protect and optimize their harvests.')}</motion.p>
+                    <motion.h1 variants={itemVarient} className="text-5xl text-center m-5 pt-20"><strong>{t('home.ourMission', 'Our Mission')}</strong></motion.h1>
                     <motion.p className="text-center text-lg mx-5 px-10">
-                        At AgroBot, our mission is to harness the power of artificial intelligence to transform agriculture into a smarter, more sustainable practice. We strive to empower farmers, growers, and agricultural communities with accessible, real-time tools for early disease detection and crop health management. By providing accurate insights through AI-driven image analysis and comprehensive disease information, we aim to reduce crop loss, improve food security, and support farmers in making confident, data-driven decisions that safeguard both their livelihoods and the environment.
+                        {t('home.missionText', 'At AgroBot, our mission is to harness the power of artificial intelligence to transform agriculture into a smarter, more sustainable practice. We strive to empower farmers, growers, and agricultural communities with accessible, real-time tools for early disease detection and crop health management. By providing accurate insights through AI-driven image analysis and comprehensive disease information, we aim to reduce crop loss, improve food security, and support farmers in making confident, data-driven decisions that safeguard both their livelihoods and the environment.')}
                     </motion.p>
                 </motion.div>
             </motion.div>
 
 
-            <motion.h1 className="text-5xl text-center text-green-800 bg-slate-300 m-0 p-10" variants={itemVarient}><strong>Our Services</strong></motion.h1>
+            <motion.h1 className="text-5xl text-center text-green-800 bg-slate-300 m-0 p-10" variants={itemVarient}><strong>{t('home.ourServices', 'Our Services')}</strong></motion.h1>
             <motion.div className="flex flex-row items-center justify-center bg-slate-300 pb-10"
             initial={{opacity:0, y: 30}}
             animate={{opacity:1, y: 0, transition: {duration: 0.5, ease: "easeOut"}}}
@@ -166,45 +170,27 @@ function Home() {
                 <motion.div
                 className="flex flex-col w-1/3 m-5 p-5 bg-white rounded-md shadow-lg hover:p-8 hover:shadow-2xl transition duration-300"
                 >
-                    <h1 className="text-center text-xl text-green-700"><strong>Check the problem in your crop</strong></h1>
+                    <h1 className="text-center text-xl text-green-700"><strong>{t('home.checkProblem', 'Check the problem in your crop')}</strong></h1>
                     <div className="flex flex-col justify-center items-center">
                         <img src={bg1} alt="" className="w-1/2 h-32 m-5"/>
                         <div className="flex flex-row items-center justify-center">
-                            {/* <input
-                                type="file"
-                                id="file-upload"
-                                className="hidden"
-                                onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    setSelectedFile(file);
-                                }}
-                            />
-                            <label htmlFor="file-upload">
-                                <img
-                                    src={attach}
-                                    alt=""
-                                    className="w-10 h-auto cursor-pointer"
-                                />
-                            </label> */}
                             <button className="p-2 items-center min-w-40 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50" 
-                            onClick={() => navigate('/chat')}>Visit</button>
+                            onClick={() => navigate('/chat')}>{t('home.visit', 'Visit')}</button>
                         </div>
-                        
-
                     </div>
                 </motion.div>
 
                 <motion.div
                 className="flex flex-col w-1/3 h-auto m-5 p-5 bg-white rounded-md shadow-lg hover:p-8 hover:shadow-2xl transition duration-300"
                 >
-                    <h1 className="text-center text-xl text-green-700"><strong>Get information from our Virtual Assistant</strong></h1>
+                    <h1 className="text-center text-xl text-green-700"><strong>{t('home.virtualAssistant', 'Get information from our Virtual Assistant')}</strong></h1>
                     <div className="flex flex-col justify-center items-center">
                         <img src={bg2} alt="" className="w-1/2 h-32 m-5"/>
                         <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
                         onClick={() => {
                             navigate('/chat');
                         }}
-                        >View More</button>
+                        >{t('home.viewMore', 'View More')}</button>
                         
                     </div>
                 </motion.div>
@@ -212,12 +198,12 @@ function Home() {
                 <motion.div
                 className="flex flex-col w-1/3 h-auto m-5 p-5 bg-white rounded-md shadow-lg hover:p-8 hover:shadow-2xl transition duration-300"
                 >
-                    <h1 className="text-center text-green-700 text-xl"><strong>Aware of timely diseases of different crops</strong></h1>
+                    <h1 className="text-center text-green-700 text-xl"><strong>{t('home.awareDiseases', 'Aware of timely diseases of different crops')}</strong></h1>
                     <div className="flex flex-col justify-center items-center">
                         <img src={bg3} alt="" className="w-1/2 h-32 m-5 justify-center items-center"/>
                         <button className="p-2 items-center w-2/3 text-center bg-green-50 text-green-900 border-green-900 border-2 hover:bg-green-900 hover:text-green-50"
                         onClick={scrollInto}
-                        >View More</button>
+                        >{t('home.viewMore', 'View More')}</button>
                     </div>
                 </motion.div>
             </motion.div>
@@ -230,7 +216,7 @@ function Home() {
             }}
             id="common-diseases"
             >
-                <motion.h1 className="text-5xl text-center bg-slate-600 bg-opacity-40 text-white m-0 p-10" variants={itemVarient}><strong>Common Crop Diseases</strong></motion.h1>
+                <motion.h1 className="text-5xl text-center bg-slate-600 bg-opacity-40 text-white m-0 p-10" variants={itemVarient}><strong>{t('home.commonDiseases', 'Common Crop Diseases')}</strong></motion.h1>
                 <AnimatePresence mode="wait">
                     <motion.div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-x-10 gap-y-10 px-10 py-20 mx-0 bg-slate-600 bg-opacity-40">
                         {diseases.length > 0 && visibleDiseases.filter(Boolean).map((disease) => {
@@ -246,7 +232,7 @@ function Home() {
                                 }}
                                 >
                                     <h1 className="text-4xl text-green-950 text-center pt-10 py-20"><strong>{disease.common_name}</strong></h1>
-                                    <img src={disease.image_url} alt="No image available" className="w-full h-auto pt-1 pb-10 p-10 items-center justify-center rounded-2xl"/>
+                                    <img src={disease.image_url} alt={t('home.noImage', 'No image available')} className="w-full h-auto pt-1 pb-10 p-10 items-center justify-center rounded-2xl"/>
                                 </motion.div>
                             )
                         })}

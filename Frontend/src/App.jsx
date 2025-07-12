@@ -7,6 +7,7 @@ import Login from './pages/login'
 import Register from './pages/register'
 import VirtualAssistant from './pages/virtualassistant'
 import Chat from './pages/chat'
+import './i18n'
 
 function App() {
   const [count, setCount] = useState(0)

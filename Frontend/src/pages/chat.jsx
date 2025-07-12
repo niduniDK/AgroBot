@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github.css'; // Import highlight.js styles
+import { useTranslation } from 'react-i18next';
 
 function Chat() {
 
@@ -20,6 +21,9 @@ function Chat() {
   const [displayText, setDisplayText] = useState("");
  
   const [messages, setMessages] = useState([]);
+
+  const {t, i18n} = useTranslation();
+  const lang = localStorage.getItem('language') || 'en';
 
   const getPrediction = async () => {
   if (!selectedFile) return;
@@ -43,44 +47,47 @@ function Chat() {
           isBot: true
         }
       ]);
-    } else {
-      alert("No prediction received. Please try again.");
-    }
-  } catch (error) {
-    console.error("Error getting prediction:", error);
-    alert("Prediction failed. Check console for details.");
-  } finally {
-    setSelectedFile(null);
-  }
-};
+        } else {
+          alert("No prediction received. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error getting prediction:", error);
+        alert("Prediction failed. Check console for details.");
+      } finally {
+        setSelectedFile(null);
+      }
+    };
 
 
     useEffect(() => {
-  const storedMsgs = localStorage.getItem("messages");
+      const storedMsgs = localStorage.getItem("messages");
 
-  if (storedMsgs) {
-      setMessages(JSON.parse(storedMsgs));
-    } else {
-      setMessages([
-        { text: "Hello! How can I assist you today?", isBot: true }
-      ]);
-    }
+      if (storedMsgs) {
+          setMessages(JSON.parse(storedMsgs));
+        } else {
+          setMessages([
+            { text: "Hello! How can I assist you today?", isBot: true }
+          ]);
+        }
 
-  }, []);
+      }, []);
 
 
-  
-
-  const navigate = useNavigate();
-
-  const MsgBox = ({ msg, isBot }) => {
+  const MsgBox = ({ msg, isBot, image=null }) => {
     return (
       <div className={`flex ${isBot ? "justify-start" : "justify-end"}`}>
-        <p className={`text-black rounded-xl p-5 mx-8 my-3 ${isBot ? "text-left bg-green-300" : "text-right bg-green-50"}`}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
-            {msg}
-          </ReactMarkdown>
-        </p>
+        <div className={`text-black rounded-xl p-5 mx-8 my-3 ${isBot ? "text-left bg-green-300" : "text-right bg-green-50"}`}>
+          {
+            image ? (
+              <img src={image} alt='Image Uploaded' className='max-w-xs rounded-lg' />
+            ) : (
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+                {lang === "en"? msg: t(msg)}
+              </ReactMarkdown>
+            )
+          }
+          
+        </div>
       </div>
     );
   };
@@ -148,7 +155,9 @@ function Chat() {
     <div className='min-h-screen bg-gradient-to-r from-green-950 to-blue-950'>
       <Navbar />
       <div className="text-3xl text-green-100 text-center">
-          <p className="text-5xl text-green-100 text-center font-bold lg:mx-96 md:my-24">{displayText}</p>
+          <p className="text-5xl text-green-100 text-center font-bold lg:mx-96 md:my-24">
+            {lang === "en"? displayText : t(displayText)}
+          </p>
       </div>
       <div className="flex flex-col min-h-96 bg-gradient-r from-green-950 to-blue-950">
         
@@ -160,7 +169,7 @@ function Chat() {
             />
           )} */}
           {messages.map((msg, index) => (
-            <MsgBox key={index} msg={msg.text} isBot={msg.isBot} />
+            <MsgBox key={index} msg={msg.text} image={msg.image ? msg.image : null} isBot={msg.isBot} />
           ))}
         </div>
 
