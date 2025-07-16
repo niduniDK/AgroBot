@@ -29,6 +29,9 @@ cd AgroBot
 
 ```bash
 cd Backend
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
 pip install -r requirements.txt
 ```
 
@@ -54,7 +57,7 @@ npm run dev
 ### 🌍 How AgroBot Helps Farmers
 *. Disease Identification: By simply uploading images of affected plants, AgroBot analyzes the plant and suggests possible diseases.
 
-*. Tailored Recommendations: AgroBot generates personalized solutions for each disease, whether it’s through cultural practices or chemical treatments.
+*. Tailored Recommendations: AgroBot generates personalized solutions for each disease, whether it’s through cultural practices or chemical treatments via our AI-powered virtual assistant.
 
 *. Tracking Plant Health: Keep track of plant health over time and get insights into the best care practices based on your region’s climate and soil conditions.
 
@@ -62,9 +65,8 @@ npm run dev
 
 
 ### 📈 Future Plans
-*. Mobile Application: Develop a mobile version of AgroBot for easier access in the field.
-
-*. AI-Powered Disease Prediction: Use machine learning to predict potential disease outbreaks based on weather conditions and past trends.
+*. Add local language support
+*. Offline App Mode
 
 ## Screen Images
 
